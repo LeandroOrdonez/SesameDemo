@@ -1,5 +1,6 @@
 package openrdf.sesame.demo;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.openrdf.OpenRDFException;
@@ -29,15 +30,16 @@ public class SesameDemo {
 
                     TupleQueryResult result = tupleQuery.evaluate();
                     try {
+                        List<String> bindingNames = result.getBindingNames();
                         while (result.hasNext()) {
                             BindingSet bindingSet = result.next();
-                            Value valueOfX = bindingSet.getValue("x");
-                            Value valueOfP = bindingSet.getValue("p");
-                            Value valueOfY = bindingSet.getValue("y");
+                            Value valueOfX = bindingSet.getValue(bindingNames.get(0));
+                            Value valueOfP = bindingSet.getValue(bindingNames.get(1));
+                            Value valueOfY = bindingSet.getValue(bindingNames.get(2));
                             // do something interesting with the values here...
-                            System.out.println("?x: " + valueOfX.stringValue());
-                            System.out.println("?p: " + valueOfP.stringValue());
-                            System.out.println("?y: " + valueOfY.stringValue());
+                            System.out.println(bindingNames.get(0) + ": " + valueOfX.stringValue());
+                            System.out.println(bindingNames.get(1) + ": " + valueOfP.stringValue());
+                            System.out.println(bindingNames.get(2) + ": " + valueOfY.stringValue());
                             //-------------------------------------------------
                         }
                     } catch (Exception ex) {
