@@ -102,14 +102,14 @@ public class SesameDemo {
             ValueFactory factory = repo.getValueFactory();
             //create some resources and literals to make statements out of them
             //-- Classes
-            URI documentClass = factory.createURI("http://www.example.org/category-structure.rdf#Document");
+            URI operationClass = factory.createURI("http://www.example.org/category-structure.rdf#Operation");
             URI categoryClass = factory.createURI("http://www.example.org/category-structure.rdf#Category");
             URI membershipRelClass = factory.createURI("http://www.example.org/category-structure.rdf#Membership_Relation");
             URI termRelClass = factory.createURI("http://www.example.org/category-structure.rdf#Term_Relation");
             URI termClass = factory.createURI("http://www.example.org/category-structure.rdf#Term");
 
             //-- Instances
-            URI document1 = factory.createURI("http://www.example.org/documents/1");
+            URI operation1 = factory.createURI("http://www.example.org/operations/1");
             URI category3 = factory.createURI("http://www.example.org/categories/3");
             URI membershipRel3 = factory.createURI("http://www.example.org/membership_relations/3");
             URI termRel3 = factory.createURI("http://www.example.org/term_relations/3");
@@ -130,8 +130,8 @@ public class SesameDemo {
             
             RepositoryConnection con = repo.getConnection();
             try{
-                con.add(document1, RDF.TYPE, documentClass);
-                con.add(document1, is_member_of, membershipRel3);
+                con.add(operation1, RDF.TYPE, operationClass);
+                con.add(operation1, is_member_of, membershipRel3);
                 con.add(category3, RDF.TYPE, categoryClass);
                 con.add(category3, has_term, termRel3);
                 con.add(membershipRel3, RDF.TYPE, membershipRelClass);
@@ -175,7 +175,7 @@ public class SesameDemo {
             //Print the results from issuing the query in System console.
             SesameDemo.issueGraphQuery(repo, queryString2, null);
             //Save the results from issuing the query into a file.
-            FileOutputStream out2 = new FileOutputStream("src/outcome/graph-query-result.srx");
+            FileOutputStream out2 = new FileOutputStream("src/outcome/graph-query-result.rdf");
             SesameDemo.issueGraphQuery(repo, queryString2, out2);
             
             //--------------- Adding some statements ----------------------
