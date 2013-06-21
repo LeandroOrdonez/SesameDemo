@@ -10,6 +10,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.model.vocabulary.RDFS;
+import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
@@ -139,6 +141,9 @@ public class SesameDemo {
                 con.add(termRel3, term_value, term1);
                 con.add(termRel3, term_probability, factory.createLiteral(0.7));                
                 con.add(term1, RDF.TYPE, termClass);
+                con.add(has_content, RDF.TYPE, RDF.PROPERTY);
+                con.add(has_content, RDFS.DOMAIN, termClass);
+                con.add(has_content, RDFS.RANGE, XMLSchema.STRING);
                 con.add(term1, has_content, factory.createLiteral("HolaMundo!!!"));
                 
             } finally {
